@@ -16,19 +16,19 @@
             // if the character entered matches the character displayed
             if (value == characterList[index]) {
                 // inform the user it was correct, clear the textbox, and maintain focus on the textbox for them.
-                $("#characterDisplay").animate({}, 1000);
+                $("#characterDisplay").animate({ backgroundColor: "green" }, 50).animate({ backgroundColor: jQuery.Color( $(".jumbotron"), "background-color" )});
                 $("#input").val('');
                 $("#input").focus();
                 index++;
             }
             else {
-                $("#characterDisplay").text("Incorrect!");
+                $("#characterDisplay").animate({ backgroundColor: "red" }, 50).animate({ backgroundColor: jQuery.Color($(".jumbotron"), "background-color") });
                 $("#input").val('');
                 $("#input").focus();
                 index++;
             }
             // once the user has been informed it was correct and the index is incremented, display the next symbol.
-            setTimeout(displayNextSymbol, 1000);
+            setTimeout(displayNextSymbol, 300);
         }
     });
 
@@ -48,7 +48,7 @@
     }); // toggle keyboard link click listener
 
     function displayNextSymbol() {
-        $(characterDisplay).html(characterList[index]);
+        $("#characterDisplay").html(characterList[index]);
     }
 });
 
