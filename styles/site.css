@@ -1,2 +1,24 @@
-﻿body {
+﻿#characterDisplay
+{
+    font-size:10em;
+}
+
+#toggleKeyboard
+{
+    padding-top:10px;
+}
+
+.center
+{
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.jumbotron
+{
+    padding-top:24px !important;
+    padding-right:30px !important;
+    padding-left:30px !important;
+    padding-bottom:24px !important;
 }
