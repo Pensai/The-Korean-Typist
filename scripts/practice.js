@@ -10,13 +10,12 @@
     // onkeypress listener for the textbox which the user uses to match the character
     $("#input").keypress(function (event)
     {
-        // if the keypress is "enter", that is submit.
+        // if the keypress is "enter".
         if (event.which == 13) {
-            var value = $("#input").val();
-            // if the character entered matches the character displayed
-            if (value == characterList[index]) {
+            var typedCharacter = $("#input").val();
+            if (typedCharacter == characterList[index]) {
                 // inform the user it was correct, clear the textbox, and maintain focus on the textbox for them.
-                $("#characterDisplay").animate({ backgroundColor: "green" }, 50).animate({ backgroundColor: jQuery.Color( $(".jumbotron"), "background-color" )});
+                $("#characterDisplay").animate({ backgroundColor: "green" }, 50).animate({ backgroundColor: jQuery.Color( $(".jumbotron"), "background-color" )}); // animates a green background and then retrieves the background colour of its container and fades it back to its original colour.
                 $("#input").val('');
                 $("#input").focus();
                 index++;
@@ -27,7 +26,6 @@
                 $("#input").focus();
                 index++;
             }
-            // once the user has been informed it was correct and the index is incremented, display the next symbol.
             setTimeout(displayNextSymbol, 300);
         }
     });
