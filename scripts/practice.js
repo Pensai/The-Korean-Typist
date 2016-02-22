@@ -2,7 +2,7 @@
     Special Thanks to Miss Minji H. for translations.
 */
 
-var AllowTries = true;
+var AllowTries = false;
 var IsCorrect = false;
 
 var IsInitialDifficulty = false;
@@ -17,8 +17,8 @@ $(document).ready(function () {
     $(characterDisplay).css("font-size", "3em");
     $(characterDisplay).html("Choose a difficulty Above");
 
-    $("#AllowTries").attr("class", "form-control btn-success");
-    $("#AllowTries").attr("value", "yes");
+    $("#AllowTries").attr("class", "form-control btn-danger");
+    $("#AllowTries").attr("value", "no");
 
     // Click listener for the toggle keyboard link
     $("#toggleKeyboard").click(function () {
@@ -33,16 +33,20 @@ $(document).ready(function () {
     }); // toggle keyboard link click listener
 
 
-
+    // Handles the settings of allowing multiple tries. 
     $("#AllowTries").click(function () {
         var value = $("#AllowTries").attr("value");
         if (value == "yes") {
             $("#AllowTries").attr("value", "no");
             $("#AllowTries").attr("class", "form-control btn-danger");
+            $("#AllowTries").text("Multiple Tries Disallowed");
+            AllowTries = false;
         }
         else if (value == "no") {
             $("#AllowTries").attr("value", "yes");
             $("#AllowTries").attr("class", "form-control btn-success");
+            $("#AllowTries").text("Multiple Tries Allowed");
+            AllowTries = true;
         }
     });
 
@@ -59,11 +63,15 @@ $(document).ready(function () {
                 $("#input").focus();
                 CurrentIndex++;
             }
-            else {
+            else { // If the user got the character wrong
                 $("#characterDisplay").animate({ backgroundColor: "red" }, 50).animate({ backgroundColor: jQuery.Color($(".jumbotron"), "background-color") });
                 $("#input").val('');
                 $("#input").focus();
-                CurrentIndex++;
+                // Only increment the index if the user is not allowing multiple attempts
+                if (!AllowTries)
+                {
+                    CurrentIndex++;
+                }
             }
 
             if (CurrentIndex == CurrentCharacterList.length) {
