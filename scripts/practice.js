@@ -1,9 +1,18 @@
-﻿$(document).ready(function () {
+﻿/*
+    Special Thanks to Miss Minji H. for translations.
+*/
+
+var AllowTries = true;
+var IsCorrect = false;
+
+$(document).ready(function ()
+{
     $(characterDisplay).css("font-size", "3em");
     $(characterDisplay).html("Choose a difficulty Above");
 
     // Click listener for the toggle keyboard link
-    $("#toggleKeyboard").click(function () {
+    $("#toggleKeyboard").click(function ()
+    {
         if ($("#toggleKeyboard").text() == "Hide Keyboard") {
             $("#koreanKeyboard").fadeOut("slow");
             $("#toggleKeyboard").text("Show Keyboard");
@@ -13,6 +22,24 @@
             $("#toggleKeyboard").text("Hide Keyboard");
         }
     }); // toggle keyboard link click listener
+
+    $("#AllowTries").attr("class", "form-control btn-success");
+    $("#AllowTries").attr("value", "yes");
+
+    $("#AllowTries").click(function ()
+    {
+        var value = $("#AllowTries").attr("value");
+        if (value == "yes")
+        {
+            $("#AllowTries").attr("value", "no");
+            $("#AllowTries").attr("class", "form-control btn-danger");
+        }
+        else if (value == "no")
+        {
+            $("#AllowTries").attr("value", "yes");
+            $("#AllowTries").attr("class", "form-control btn-success");
+        }
+    });
 });
 
 /*
@@ -90,7 +117,15 @@ function BeginQuiz(difficulty)
                 $("#input").focus();
                 index++;
             }
-            setTimeout(displayNextSymbol(CurrentCharacterList, index), 300);
+
+            if (index == CurrentCharacterList.length)
+            {
+                $("#characterDisplay").html("Well Done / 참 잘했어요");
+            }
+            else
+            {
+                setTimeout(displayNextSymbol(CurrentCharacterList, index), 300);
+            }
         } // event.which == 13
     });
 } // BeginQuiz()
