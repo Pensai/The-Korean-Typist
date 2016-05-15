@@ -1,4 +1,4 @@
-﻿/*
+/*
     Special Thanks to Miss Minji H. for translations.
 */
 
@@ -14,19 +14,19 @@ var MediumCharacterList = ["가", "구", "나", "무", "두", "모", "다", "누
 var HardCharacterList = ["ㅃ", "ㄲ", "구토", "처녀", "부여하다", "바코드", "여보", "지혜", "캐나다", "키스", "좋아", "십일", "필요하다", "졸업", "좋아", "낙지", "맥주", "맙소사", "있다", "닻줄", "불고기", "짬뽕", "오빠", "예쁘다", "쓰다", "싸다", "빠지다", "비싸다", "깜짝 놀라다", "가깝다", "코끼리", "원숭이", "까다롭다"];
 
 $(document).ready(function () {
-    $(characterDisplay).css("font-size", "3em");
-    $(characterDisplay).html("Choose a difficulty Above");
+    "use strict";
+    $("#characterDisplay").css("font-size", "3em");
+    $("#characterDisplay").html("Choose a difficulty Above");
 
     $("#AllowTries").attr("class", "form-control btn-danger");
     $("#AllowTries").attr("value", "no");
 
     // Click listener for the toggle keyboard link
     $("#toggleKeyboard").click(function () {
-        if ($("#toggleKeyboard").text() == "Hide Keyboard") {
+        if ($("#toggleKeyboard").text() === "Hide Keyboard") {
             $("#koreanKeyboard").fadeOut("slow");
             $("#toggleKeyboard").text("Show Keyboard");
-        }
-        else {
+        } else {
             $("#koreanKeyboard").fadeIn("slow");
             $("#toggleKeyboard").text("Hide Keyboard");
         }
@@ -36,13 +36,12 @@ $(document).ready(function () {
     // Handles the settings of allowing multiple tries. 
     $("#AllowTries").click(function () {
         var value = $("#AllowTries").attr("value");
-        if (value == "yes") {
+        if (value === "yes") {
             $("#AllowTries").attr("value", "no");
             $("#AllowTries").attr("class", "form-control btn-danger");
             $("#AllowTries").text("Multiple Tries Disallowed");
             AllowTries = false;
-        }
-        else if (value == "no") {
+        } else if (value === "no") {
             $("#AllowTries").attr("value", "yes");
             $("#AllowTries").attr("class", "form-control btn-success");
             $("#AllowTries").text("Multiple Tries Allowed");
@@ -52,9 +51,9 @@ $(document).ready(function () {
 
     $("#input").keypress(function (event) {
         // if the keypress is "enter".
-        if (event.which == 13) {
+        if (event.which === 13) {
             // If the typed character matches the displayed character
-            if ($("#input").val() == CurrentCharacterList[CurrentIndex]) {
+            if ($("#input").val() === CurrentCharacterList[CurrentIndex]) {
                 // Flash the background colour green to let the user know they got it right
                 $("#characterDisplay").animate({ backgroundColor: "green" }, 50).animate({ backgroundColor: jQuery.Color($(".jumbotron"), "background-color") });
                 // Clear the input
@@ -62,19 +61,17 @@ $(document).ready(function () {
                 // Maintain focus for more seamless typing
                 $("#input").focus();
                 CurrentIndex++;
-            }
-            else { // If the user got the character wrong
+            } else { // If the user got the character wrong
                 $("#characterDisplay").animate({ backgroundColor: "red" }, 50).animate({ backgroundColor: jQuery.Color($(".jumbotron"), "background-color") });
                 $("#input").val('');
                 $("#input").focus();
                 // Only increment the index if the user is not allowing multiple attempts
-                if (!AllowTries)
-                {
+                if (!AllowTries) {
                     CurrentIndex++;
                 }
             }
 
-            if (CurrentIndex == CurrentCharacterList.length) {
+            if (CurrentIndex === CurrentCharacterList.length) {
                 $("#characterDisplay").html("Well Done! - 참 잘했어요!");
             }
             else {
