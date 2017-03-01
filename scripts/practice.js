@@ -14,6 +14,7 @@ var MediumCharacterList = ["가", "구", "나", "무", "두", "모", "다", "누
 var HardCharacterList = ["ㅃ", "ㄲ", "구토", "처녀", "부여하다", "바코드", "여보", "지혜", "캐나다", "키스", "좋아", "십일", "필요하다", "졸업", "좋아", "낙지", "맥주", "맙소사", "있다", "닻줄", "불고기", "짬뽕", "오빠", "예쁘다", "쓰다", "싸다", "빠지다", "비싸다", "깜짝 놀라다", "가깝다", "코끼리", "원숭이", "까다롭다"];
 
 $(document).ready(function () {
+    var testDb = new PouchDB('Test');
     "use strict";
     $("#characterDisplay").css("font-size", "3em");
     $("#characterDisplay").html("Choose a difficulty Above");
