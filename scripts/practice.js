@@ -1,6 +1,8 @@
-/*
+/******************************************************
     Special Thanks to Miss Minji H. for translations.
-*/
+*******************************************************/
+"use strict";
+var $characterDisplay;
 
 var AllowTries = false;
 var IsCorrect = false;
@@ -14,58 +16,63 @@ var MediumCharacterList = ["가", "구", "나", "무", "두", "모", "다", "누
 var HardCharacterList = ["ㅃ", "ㄲ", "구토", "처녀", "부여하다", "바코드", "여보", "지혜", "캐나다", "키스", "좋아", "십일", "필요하다", "졸업", "좋아", "낙지", "맥주", "맙소사", "있다", "닻줄", "불고기", "짬뽕", "오빠", "예쁘다", "쓰다", "싸다", "빠지다", "비싸다", "깜짝 놀라다", "가깝다", "코끼리", "원숭이", "까다롭다"];
 
 $(document).ready(function () {
+    // Page elements
+    $characterDisplay = $("#characterDisplay");
+    var $btnAllowTries = $("#btnAllowTries");
+    var $btnToggleKeyboard = $("#btnToggleKeyboard");
+    var $imgKoreanKeyboard = $("#imgKoreanKeyboard");
+    var $txtAttemptInput = $("#txtAttemptInput");
     var testDb = new PouchDB('Test');
-    "use strict";
-    $("#characterDisplay").css("font-size", "3em");
-    $("#characterDisplay").html("Choose a difficulty Above");
 
-    $("#AllowTries").attr("class", "form-control btn-danger");
-    $("#AllowTries").attr("value", "no");
+    $characterDisplay.css("font-size", "3.5em");
+    $characterDisplay.html("Choose a difficulty Above");
+
+    $btnAllowTries.attr("class", "form-control btn-danger");
+    $btnAllowTries.attr("value", "no");
 
     // Click listener for the toggle keyboard link
-    $("#toggleKeyboard").click(function () {
-        if ($("#toggleKeyboard").text() === "Hide Keyboard") {
-            $("#koreanKeyboard").fadeOut("slow");
-            $("#toggleKeyboard").text("Show Keyboard");
+    $btnToggleKeyboard.click(function () {
+        if ($btnToggleKeyboard.text() === "Hide Keyboard") {
+            $imgKoreanKeyboard.fadeOut("slow");
+            $btnToggleKeyboard.text("Show Keyboard");
         } else {
-            $("#koreanKeyboard").fadeIn("slow");
-            $("#toggleKeyboard").text("Hide Keyboard");
+            $imgKoreanKeyboard.fadeIn("slow");
+            $btnToggleKeyboard.text("Hide Keyboard");
         }
     }); // toggle keyboard link click listener
 
 
     // Handles the settings of allowing multiple tries. 
-    $("#AllowTries").click(function () {
-        var value = $("#AllowTries").attr("value");
+    $btnAllowTries.click(function (){
+        var value = $btnAllowTries.attr("value");
         if (value === "yes") {
-            $("#AllowTries").attr("value", "no");
-            $("#AllowTries").attr("class", "form-control btn-danger");
-            $("#AllowTries").text("Multiple Tries Disallowed");
+            $btnAllowTries.attr("value", "no");
+            $btnAllowTries.attr("class", "form-control btn-danger");
+            $btnAllowTries.text("Multiple Tries Disallowed");
             AllowTries = false;
         } else if (value === "no") {
-            $("#AllowTries").attr("value", "yes");
-            $("#AllowTries").attr("class", "form-control btn-success");
-            $("#AllowTries").text("Multiple Tries Allowed");
+            $btnAllowTries.attr("value", "yes");
+            $btnAllowTries.attr("class", "form-control btn-success");
+            $btnAllowTries.text("Multiple Tries Allowed");
             AllowTries = true;
         }
     });
 
-    $("#input").keypress(function (event) {
+    $txtAttemptInput.keypress(function (event) {
         // if the keypress is "enter".
         if (event.which === 13) {
             // If the typed character matches the displayed character
-            if ($("#input").val() === CurrentCharacterList[CurrentIndex]) {
+            if ($txtAttemptInput.val() === CurrentCharacterList[CurrentIndex]) {
                 // Flash the background colour green to let the user know they got it right
-                $("#characterDisplay").animate({ backgroundColor: "green" }, 50).animate({ backgroundColor: jQuery.Color($(".jumbotron"), "background-color") });
-                // Clear the input
-                $("#input").val('');
-                // Maintain focus for more seamless typing
-                $("#input").focus();
+                $characterDisplay.animate({ backgroundColor: "green" }, 50)
+                                 .animate({ backgroundColor: jQuery.Color($(".jumbotron"), "background-color") });
+                $txtAttemptInput.val('');
+                $txtAttemptInput.focus();
                 CurrentIndex++;
             } else { // If the user got the character wrong
-                $("#characterDisplay").animate({ backgroundColor: "red" }, 50).animate({ backgroundColor: jQuery.Color($(".jumbotron"), "background-color") });
-                $("#input").val('');
-                $("#input").focus();
+                $characterDisplay.animate({ backgroundColor: "red" }, 50).animate({ backgroundColor: jQuery.Color($(".jumbotron"), "background-color") });
+                $txtAttemptInput.val('');
+                $txtAttemptInput.focus();
                 // Only increment the index if the user is not allowing multiple attempts
                 if (!AllowTries) {
                     CurrentIndex++;
@@ -73,7 +80,7 @@ $(document).ready(function () {
             }
 
             if (CurrentIndex === CurrentCharacterList.length) {
-                $("#characterDisplay").html("Well Done! - 참 잘했어요!");
+                $characterDisplay.html("Well Done! - 참 잘했어요!");
             }
             else {
                 setTimeout(displayNextSymbol(CurrentCharacterList, CurrentIndex), 300);
@@ -83,7 +90,7 @@ $(document).ready(function () {
 });
 
 function displayNextSymbol(characterList, index) {
-    $("#characterDisplay").html(characterList[index]);
+    $characterDisplay.html(characterList[index]);
 }
 
 function BeginQuiz(difficulty) {
@@ -103,7 +110,7 @@ function BeginQuiz(difficulty) {
             break;
     }
     // Shuffle the characterList array for a "unique" experience each time.
-    $(characterDisplay).html(CurrentCharacterList[CurrentIndex]);
+    $characterDisplay.html(CurrentCharacterList[CurrentIndex]);
 } // BeginQuiz()
 
 /*

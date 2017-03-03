@@ -50,10 +50,18 @@
         <div class="header clearfix">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation"><a href="index.html">Home</a></li>
-                    <li role="presentation" class="active"><a href="practice.html">Practice</a></li>
-                    <li role="presentation"><a href="#">About</a></li>
-                    <li role="presentation"><a href="#">Contact</a></li>
+                    <li role="presentation">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li role="presentation" class="active">
+                        <a href="practice.html">Practice</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#">About</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#">Contact</a>
+                    </li>
                 </ul>
             </nav>
             <h3 class="text-muted">The Korean Typist</h3>
@@ -66,14 +74,16 @@
                 <button type="button" id="btnHard" class="btn btn-default" value="Hard" onclick="BeginQuiz(this.value)">Hard</button>
             </div>
         </div>
-        <button type="button" id="AllowTries" value="" class="form-control">Multiple Attemps Disallowed</button>
+
+        <button type="button" id="btnAllowTries" class="allowTries" value="" class="form-control">Multiple Attemps Disallowed</button>
+
         <div class="jumbotron">
             <p id="characterDisplay"></p>
-            <input type="text" id="input" class="form-control input-lg" placeholder="Type, then press enter" />
-            <a id="toggleKeyboard" href="#">Hide Keyboard</a>
+            <input type="text" id="txtAttemptInput" class="form-control input-lg attemptInput" placeholder="Type, then press enter" />
+            <a id="btnToggleKeyboard" class="toggleKeyboard" href="#">Hide Keyboard</a>
         </div>
         
-        <img id="koreanKeyboard" class="center" src="images/Korean_Keyboard.PNG" />
+        <img id="imgKoreanKeyboard" class="center" src="images/Korean_Keyboard.PNG" />
 
         <footer class="footer">
             <p>&copy; 2016 William Banks</p>

@@ -1,14 +1,14 @@
-﻿#characterDisplay
+﻿.characterDisplay
 {
     font-size:10em;
 }
 
-#toggleKeyboard
+.toggleKeyboard
 {
     padding-top:10px;
 }
 
-#difficultyWrapper
+.difficultyWrapper
 {
     margin-bottom:1%;
     Width: 50%;
@@ -16,14 +16,14 @@
     margin-right: auto;
 }
 
-#input
+.attemptInput
 {
     width:50%;
     margin-left:auto;
     margin-right:auto;
 }
 
-#AllowTries
+.allowTries
 {
     width: 33%;
     margin-left: auto;
