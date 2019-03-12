@@ -15,13 +15,14 @@ var EasyCharacterList = ["ㅂ", "ㅈ", "ㄷ", "ㄱ", "ㅅ", "ㅛ", "ㅕ", "ㅑ",
 var MediumCharacterList = ["가", "구", "나", "무", "두", "모", "다", "누", "오", "모", "게", "르", "두", "개", "내", "사", "리", "네", "부", "라", "머", "로", "소", "부", "시", "마"];
 var HardCharacterList = ["ㅃ", "ㄲ", "구토", "처녀", "부여하다", "바코드", "여보", "지혜", "캐나다", "키스", "좋아", "십일", "필요하다", "졸업", "좋아", "낙지", "맥주", "맙소사", "있다", "닻줄", "불고기", "짬뽕", "오빠", "예쁘다", "쓰다", "싸다", "빠지다", "비싸다", "깜짝 놀라다", "가깝다", "코끼리", "원숭이", "까다롭다"];
 
-$(document).ready(function() {
+$(document).ready(function () {
     // Page elements
     $characterDisplay = $("#characterDisplay");
     var $btnAllowTries = $("#btnAllowTries");
     var $btnToggleKeyboard = $("#btnToggleKeyboard");
     var $imgKoreanKeyboard = $("#imgKoreanKeyboard");
     var $txtAttemptInput = $("#txtAttemptInput");
+    var testDb = new PouchDB('Test');
 
     $characterDisplay.css("font-size", "3.5em");
     $characterDisplay.html("Choose a difficulty Above");
@@ -30,7 +31,7 @@ $(document).ready(function() {
     $btnAllowTries.attr("value", "no");
 
     // Click listener for the toggle keyboard link
-    $btnToggleKeyboard.click(function() {
+    $btnToggleKeyboard.click(function () {
         if ($btnToggleKeyboard.text() === "Hide Keyboard") {
             $imgKoreanKeyboard.fadeOut("slow");
             $btnToggleKeyboard.text("Show Keyboard");
@@ -42,7 +43,7 @@ $(document).ready(function() {
 
 
     // Handles the settings of allowing multiple tries. 
-    $btnAllowTries.click(function() {
+    $btnAllowTries.click(function (){
         var value = $btnAllowTries.attr("value");
         if (value === "yes") {
             $btnAllowTries.attr("value", "no");
@@ -57,14 +58,14 @@ $(document).ready(function() {
         }
     });
 
-    $txtAttemptInput.keypress(function(event) {
+    $txtAttemptInput.keypress(function (event) {
         // if the keypress is "enter".
         if (event.which === 13) {
             // If the typed character matches the displayed character
             if ($txtAttemptInput.val() === CurrentCharacterList[CurrentIndex]) {
                 // Flash the background colour green to let the user know they got it right
                 $characterDisplay.animate({ backgroundColor: "green" }, 50)
-                    .animate({ backgroundColor: jQuery.Color($(".jumbotron"), "background-color") });
+                                 .animate({ backgroundColor: jQuery.Color($(".jumbotron"), "background-color") });
                 $txtAttemptInput.val('');
                 $txtAttemptInput.focus();
                 CurrentIndex++;
@@ -80,7 +81,8 @@ $(document).ready(function() {
 
             if (CurrentIndex === CurrentCharacterList.length) {
                 $characterDisplay.html("Well Done! - 참 잘했어요!");
-            } else {
+            }
+            else {
                 setTimeout(displayNextSymbol(CurrentCharacterList, CurrentIndex), 300);
             }
         } // event.which == 13
@@ -115,8 +117,7 @@ function BeginQuiz(difficulty) {
  *  Unbiased Fisher-Yates algorithm for shuffling an array and other "list-like" data structures 
  */
 function Shuffle(array) {
-    var currentIndex = array.length,
-        temporaryValue, randomIndex;
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
